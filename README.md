@@ -26,3 +26,8 @@ Caminho para rodar o projeto:
 Caminho para rodar o projeto:
 
     raspberry/scan_key_arduino.py
+
+
+Como rodar:
+
+    python3 raspberry/scan_key_arduino.py

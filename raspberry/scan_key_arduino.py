@@ -61,7 +61,7 @@ def desligarEletronicos():
 
 def capturaCaractere():
     caracter = None
-    caracter = str(comunicacaoSerial.readline())
+    caracter = str(comunicacaoSerial.readline().decode('ascii'))
     return caracter[0] #indice 0, primeiro caractere
 
 def capturaSenha():
@@ -86,9 +86,9 @@ def validaDataCredencial(dadosUsuario, senhaAcesso):
 
     dataAgendamentoObj = datetime.strptime(dadosUsuario["data_agendamento"], '%Y-%m-%d %H:%M:%S.%f')
     dataSaidaObj = datetime.strptime(dadosUsuario["data_saida"], '%Y-%m-%d %H:%M:%S.%f')
-
+    
     if(dataAgendamentoObj <= now and dataSaidaObj >= now):
-        print("AGENDADO PARA: " + str(dataAgendamentoObj))
+        print("AGENDADO PARA: " + str(dataAgendamentoObj) + " ATE: " + str(dataSaidaObj))
         return True
     else:
         print("FORA DO HORARIO/DATA DE AGENDAMENTO: " + str(dataAgendamentoObj))
@@ -107,8 +107,8 @@ def validaCredencial(DB, senhaAcesso):
 def validaSenha(DB, senhaAcesso):
     for idx in DB:
         try:
-            if(str((DB[idx])["token"]) == str(senhaAcesso)):
-                return DB[idx]
+            if(str(idx["token"]) == str(senhaAcesso)):
+                return idx
                 #return True
         except:
             pass
